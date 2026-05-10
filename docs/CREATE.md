@@ -1,0 +1,353 @@
+# 📖 Руководство: Как создать погодного Telegram-бота на Python с нуля
+
+> Пошаговое техническое руководство для начинающих  
+> Проектная практика | Группа 251-333 | Московский политех
+
+---
+
+## Содержание
+
+1. [Введение](#введение)
+2. [Что нам понадобится](#что-нам-понадобится)
+3. [Шаг 1 — Создаём бота в Telegram](#шаг-1--создаём-бота-в-telegram)
+4. [Шаг 2 — Получаем API-ключ OpenWeatherMap](#шаг-2--получаем-api-ключ-openweathermap)
+5. [Шаг 3 — Устанавливаем Python и библиотеки](#шаг-3--устанавливаем-python-и-библиотеки)
+6. [Шаг 4 — Пишем код бота](#шаг-4--пишем-код-бота)
+7. [Шаг 5 — Запускаем и тестируем](#шаг-5--запускаем-и-тестируем)
+8. [Шаг 6 — Модификации и улучшения](#шаг-6--модификации-и-улучшения)
+9. [Частые ошибки](#частые-ошибки)
+10. [Итог](#итог)
+
+---
+
+## Введение
+
+В этом руководстве мы создадим Telegram-бота, который будет отвечать на название города актуальной информацией о погоде. Бот будет использовать **Telegram Bot API** для общения с пользователем и **OpenWeatherMap API** для получения погодных данных.
+
+### Как работает бот — схема взаимодействия
+
+```
+Пользователь
+    │
+    │  Вводит название города
+    ▼
+Telegram Bot API
+    │
+    │  Передаёт сообщение боту
+    ▼
+Наш бот (Python)
+    │
+    │  Отправляет HTTP-запрос
+    ▼
+OpenWeatherMap API
+    │
+    │  Возвращает JSON с данными о погоде
+    ▼
+Наш бот (Python)
+    │
+    │  Форматирует ответ и отправляет пользователю
+    ▼
+Пользователь получает погоду
+```
+
+---
+
+## Что нам понадобится
+
+- Компьютер с Windows, macOS или Linux
+- Установленный Python 3.7 или новее
+- Аккаунт в Telegram
+- Аккаунт на openweathermap.org
+- Любой текстовый редактор (VS Code, PyCharm, Notepad++)
+
+---
+
+## Шаг 1 — Создаём бота в Telegram
+
+### 1.1 Находим BotFather
+
+1. Открой Telegram
+2. В поиске введи `@BotFather`
+3. Нажми **Start**
+
+<img width="389" height="361" alt="image" src="https://github.com/user-attachments/assets/b677b189-03d8-462b-8aa4-ff4c990ac1c2" />
+
+
+
+### 1.2 Создаём нового бота
+
+Отправь команду:
+
+```
+/newbot
+```
+
+BotFather спросит:
+- **Имя бота** — то, что увидят пользователи (например: `Мой Погодный Бот`)
+- **Username бота** — латиницей, должен заканчиваться на `bot` (например: `my_weather_123_bot`)
+
+> <img width="852" height="677" alt="image" src="https://github.com/user-attachments/assets/46cd7c5f-2b33-4b8e-a59c-eab96dc00fdb" />
+### 1.3 Сохраняем токен
+
+После создания BotFather выдаст **токен** — длинную строку вида:
+```
+1234567890:AABBccDDeeFFggHH-iijjKKllMMnnOOpp
+```
+
+⚠️ **Важно:** Никому не показывай этот токен! Это ключ от твоего бота.
+
+---
+
+## Шаг 2 — Получаем API-ключ OpenWeatherMap
+
+### 2.1 Регистрация
+
+1. Перейди на сайт [openweathermap.org](https://openweathermap.org)
+2. Нажми **Sign Up** и создай аккаунт
+3. Подтверди email
+
+### 2.2 Получение ключа
+
+1. Войди в аккаунт
+2. Перейди в раздел **API keys** в личном кабинете
+3. Скопируй ключ из поля **Key**
+
+> <img width="1899" height="866" alt="image" src="https://github.com/user-attachments/assets/5bd97c0c-4dca-4ab2-a802-0a5d1a3dc7f5" />
+
+
+⚠️ **Важно:** Новый ключ активируется в течение 10–15 минут после регистрации.
+
+---
+
+## Шаг 3 — Устанавливаем Python и библиотеки
+
+### 3.1 Установка Python
+
+1. Перейди на [python.org/downloads](https://python.org/downloads)
+2. Скачай последнюю версию Python 3
+3. При установке обязательно поставь галочку **"Add Python to PATH"**
+
+### 3.2 Установка библиотек
+
+Открой командную строку и выполни:
+
+```bash
+pip install pyTelegramBotAPI requests
+```
+
+Проверь, что всё установилось:
+
+```bash
+python -c "import telebot, requests; print('Всё готово!')"
+```
+
+---
+
+## Шаг 4 — Пишем код бота
+
+Создай файл `bot.py` и вставь следующий код:
+
+```python
+import os
+import time
+
+import requests
+import telebot
+from telebot import apihelper
+
+BOT_TOKEN = "8659064623:AAHiLKhVJ8rkUrOt064EfdLEujBs6LxydOs"
+OWM_API_KEY = "9455d981b0e1a3288dc4538766f2ae48"
+
+bot = telebot.TeleBot(BOT_TOKEN)
+OWM_URL = "https://api.openweathermap.org/data/2.5/weather"
+
+
+def configure_telegram_proxy() -> None:
+    proxy_url = os.getenv("TG_PROXY")
+    if proxy_url:
+        apihelper.proxy = {"https": proxy_url}
+        print("Прокси для Telegram включен (TG_PROXY).")
+
+
+def get_weather_emoji(weather_main: str) -> str:
+    weather_map = {
+        "Clear": "☀️",
+        "Clouds": "☁️",
+        "Rain": "🌧",
+        "Drizzle": "🌦",
+        "Thunderstorm": "⛈",
+        "Snow": "❄️",
+        "Mist": "🌫",
+        "Fog": "🌫",
+        "Haze": "🌫",
+        "Smoke": "🌫",
+        "Dust": "🌪",
+        "Sand": "🌪",
+        "Ash": "🌋",
+        "Squall": "💨",
+        "Tornado": "🌪",
+    }
+    return weather_map.get(weather_main, "🌍")
+
+
+def get_weather(city_name: str) -> str:
+    params = {
+        "q": city_name,
+        "appid": OWM_API_KEY,
+        "units": "metric",
+        "lang": "ru",
+    }
+
+    try:
+        response = requests.get(OWM_URL, params=params, timeout=10)
+        data = response.json()
+        if response.status_code != 200 or data.get("cod") != 200:
+            return "❌ Город не найден. Проверьте название и попробуйте снова."
+        city = data["name"]
+        temp = data["main"]["temp"]
+        feels_like = data["main"]["feels_like"]
+        humidity = data["main"]["humidity"]
+        wind_speed = data["wind"]["speed"]
+        weather_description = data["weather"][0]["description"]
+        weather_main = data["weather"][0]["main"]
+
+        emoji = get_weather_emoji(weather_main)
+        result = (
+            f"{emoji} Погода в городе: {city}\n\n"
+            f"🌡 Температура: {temp}°C\n"
+            f"🤗 Ощущается как: {feels_like}°C\n"
+            f"💧 Влажность: {humidity}%\n"
+            f"💨 Скорость ветра: {wind_speed} м/с\n"
+            f"📝 Описание: {weather_description.capitalize()}"
+        )
+        return result
+
+    except requests.exceptions.RequestException:
+        return "⚠️ Ошибка сети при запросе погоды. Попробуйте позже."
+    except Exception:
+        return "⚠️ Произошла непредвиденная ошибка. Попробуйте позже."
+
+
+@bot.message_handler(commands=["start"])
+def send_start(message):
+    bot.reply_to(
+        message,
+        "Привет! 👋\n"
+        "Я бот погоды.\n"
+        "Просто отправь название города (например: Москва или London), "
+        "и я пришлю текущую погоду.",
+    )
+
+
+@bot.message_handler(commands=["help"])
+def send_help(message):
+    bot.reply_to(
+        message,
+        "📌 Доступные команды:\n"
+        "/start — приветствие\n"
+        "/help — список команд\n\n"
+        "Также можно просто отправить название города.",
+    )
+
+
+@bot.message_handler(func=lambda message: True)
+def handle_city(message):
+    city_name = message.text.strip()
+    if not city_name:
+        bot.reply_to(message, "Введите название города.")
+        return
+
+    weather_text = get_weather(city_name)
+    bot.reply_to(message, weather_text)
+
+
+if __name__ == "__main__":
+    configure_telegram_proxy()
+    print("Бот запущен...")
+    while True:
+        try:
+            bot.infinity_polling(skip_pending=True, timeout=20, long_polling_timeout=20)
+        except Exception as error:
+            print(f"Сбой подключения к Telegram API: {error}")
+            print("Повторная попытка через 10 секунд...")
+            time.sleep(10)
+
+```
+
+
+---
+
+## Шаг 5 — Запускаем и тестируем
+
+### 5.1 Запуск
+
+В командной строке перейди в папку с файлом и выполни:
+
+```bash
+python bot.py
+```
+
+Должно появиться сообщение:
+```
+Бот запущен! 
+```
+
+### 5.2 Тестирование
+
+1. Найди своего бота в Telegram по username
+2. Отправь `/start` — должно прийти приветствие
+3. Напиши `Москва` — должна прийти погода
+4. Напиши `ааааа` — должно прийти сообщение об ошибке
+
+<img width="1178" height="717" alt="image" src="https://github.com/user-attachments/assets/3dfe824a-5e90-4878-bac1-fadbc0edfc2c" />
+<img width="682" height="138" alt="image" src="https://github.com/user-attachments/assets/13d0621f-d445-4bdc-b948-cecfc2359261" />
+
+
+
+---
+
+## Шаг 6 — Модификации и улучшения
+
+В нашем проекте мы внесли несколько улучшений по сравнению с базовой версией:
+
+### 6.1 Расширенный словарь эмодзи
+
+Добавили больше соответствий между погодными условиями и эмодзи для более наглядного отображения.
+<img width="713" height="244" alt="image" src="https://github.com/user-attachments/assets/57050e5b-591b-484c-9011-1d4ba893fcd2" />
+
+
+### 6.2 Поддержка русских названий городов
+
+Параметр `lang=ru` в запросе к API возвращает описание погоды на русском языке.
+
+### 6.3 Обработка ошибок
+
+Добавили проверку статуса ответа от API — если город не найден, бот выводит понятное сообщение об ошибке вместо технического сбоя.
+
+
+
+---
+
+## Частые ошибки
+
+| Ошибка | Причина | Решение |
+|--------|---------|---------|
+| `ModuleNotFoundError: No module named 'telebot'` | Не установлена библиотека | Выполни `pip install pyTelegramBotAPI` |
+| `Unauthorized` | Неверный токен бота | Проверь токен в BotFather |
+| `401 Unauthorized` от OpenWeatherMap | Неверный или неактивный API-ключ | Подожди 15 минут после регистрации |
+| Город не найден | Опечатка в названии | Попробуй написать на английском |
+| Бот не отвечает | Бот не запущен | Запусти `python bot.py` |
+
+---
+
+## Итог
+
+В этом руководстве мы:
+
+1. Создали бота через @BotFather и получили токен
+2. Зарегистрировались на OpenWeatherMap и получили API-ключ
+3. Установили Python и необходимые библиотеки
+4. Написали код бота с обработчиками команд
+5. Реализовали функцию получения погоды через API
+6. Протестировали работу бота
+
