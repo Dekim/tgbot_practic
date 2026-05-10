@@ -94,14 +94,11 @@ python bot.py
 weather-bot/
 ├── bot.py              # Основной код бота
 ├── README.md           
-├── DESCRIPTION.md      # Описание проекта
-├── CREATE.md           # Журнал прогресса
-├── docs/               # Исходники веб-сайта
-│   ├── index.html
-│   ├── about.html
-│   ├── members.html
-│   ├── journal.html
-│   └── resources.html
+├── docs/               
+│   ├── DESCRIPTION.md      
+|   ├── CREATE.md           
+│   ├── JOURNAL.md
+│   └── Запись работы бота.mp4
 └── reports/            # Отчёты по практике
     ├── report.docx
     └── report.pdf
