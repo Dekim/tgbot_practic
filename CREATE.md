@@ -70,7 +70,7 @@ OpenWeatherMap API
 2. В поиске введи `@BotFather`
 3. Нажми **Start**
 
-> <img width="852" height="677" alt="image" src="https://github.com/user-attachments/assets/46cd7c5f-2b33-4b8e-a59c-eab96dc00fdb" />
+
 
 
 ### 1.2 Создаём нового бота
@@ -85,8 +85,7 @@ BotFather спросит:
 - **Имя бота** — то, что увидят пользователи (например: `Мой Погодный Бот`)
 - **Username бота** — латиницей, должен заканчиваться на `bot` (например: `my_weather_123_bot`)
 
-> 📷 _[СКРИНШОТ: Процесс создания бота в BotFather]_
-
+> <img width="852" height="677" alt="image" src="https://github.com/user-attachments/assets/46cd7c5f-2b33-4b8e-a59c-eab96dc00fdb" />
 ### 1.3 Сохраняем токен
 
 После создания BotFather выдаст **токен** — длинную строку вида:
@@ -112,7 +111,8 @@ BotFather спросит:
 2. Перейди в раздел **API keys** в личном кабинете
 3. Скопируй ключ из поля **Key**
 
-> 📷 _[СКРИНШОТ: Раздел API keys в личном кабинете OpenWeatherMap]_
+> <img width="1899" height="866" alt="image" src="https://github.com/user-attachments/assets/5bd97c0c-4dca-4ab2-a802-0a5d1a3dc7f5" />
+
 
 ⚠️ **Важно:** Новый ключ активируется в течение 10–15 минут после регистрации.
 
@@ -283,7 +283,6 @@ bot.polling(none_stop=True)
 | `handle_city(message)` | Реагирует на любое текстовое сообщение |
 | `bot.polling()` | Запускает бота и держит его активным |
 
-> 📷 _[ДИАГРАММА: UML-диаграмма последовательности обработки запроса пользователя]_
 
 ---
 
@@ -309,7 +308,8 @@ python bot.py
 3. Напиши `Москва` — должна прийти погода
 4. Напиши `ааааа` — должно прийти сообщение об ошибке
 
-> 📷 _[СКРИНШОТ: Диалог с ботом — команда /start и запрос погоды]_
+<img width="1178" height="717" alt="image" src="https://github.com/user-attachments/assets/3dfe824a-5e90-4878-bac1-fadbc0edfc2c" />
+
 
 ---
 
@@ -320,6 +320,8 @@ python bot.py
 ### 6.1 Расширенный словарь эмодзи
 
 Добавили больше соответствий между погодными условиями и эмодзи для более наглядного отображения.
+<img width="713" height="244" alt="image" src="https://github.com/user-attachments/assets/57050e5b-591b-484c-9011-1d4ba893fcd2" />
+
 
 ### 6.2 Поддержка русских названий городов
 
@@ -328,6 +330,8 @@ python bot.py
 ### 6.3 Обработка ошибок
 
 Добавили проверку статуса ответа от API — если город не найден, бот выводит понятное сообщение об ошибке вместо технического сбоя.
+<img width="682" height="138" alt="image" src="https://github.com/user-attachments/assets/ca490359-37f7-4299-82ef-833e4a3fd64c" />
+
 
 ---
 
