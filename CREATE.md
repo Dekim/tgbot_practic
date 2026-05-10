@@ -50,8 +50,6 @@ OpenWeatherMap API
 Пользователь получает погоду
 ```
 
-> 📷 _[ДИАГРАММА: Вставь сюда схему взаимодействия компонентов]_
-
 ---
 
 ## Что нам понадобится
@@ -72,7 +70,9 @@ OpenWeatherMap API
 2. В поиске введи `@BotFather`
 3. Нажми **Start**
 
-> 📷 _[СКРИНШОТ: Переписка с BotFather — команда /start]_
+<img width="389" height="361" alt="image" src="https://github.com/user-attachments/assets/b677b189-03d8-462b-8aa4-ff4c990ac1c2" />
+
+
 
 ### 1.2 Создаём нового бота
 
@@ -86,8 +86,7 @@ BotFather спросит:
 - **Имя бота** — то, что увидят пользователи (например: `Мой Погодный Бот`)
 - **Username бота** — латиницей, должен заканчиваться на `bot` (например: `my_weather_123_bot`)
 
-> 📷 _[СКРИНШОТ: Процесс создания бота в BotFather]_
-
+> <img width="852" height="677" alt="image" src="https://github.com/user-attachments/assets/46cd7c5f-2b33-4b8e-a59c-eab96dc00fdb" />
 ### 1.3 Сохраняем токен
 
 После создания BotFather выдаст **токен** — длинную строку вида:
@@ -113,7 +112,8 @@ BotFather спросит:
 2. Перейди в раздел **API keys** в личном кабинете
 3. Скопируй ключ из поля **Key**
 
-> 📷 _[СКРИНШОТ: Раздел API keys в личном кабинете OpenWeatherMap]_
+> <img width="1899" height="866" alt="image" src="https://github.com/user-attachments/assets/5bd97c0c-4dca-4ab2-a802-0a5d1a3dc7f5" />
+
 
 ⚠️ **Важно:** Новый ключ активируется в течение 10–15 минут после регистрации.
 
@@ -148,143 +148,132 @@ python -c "import telebot, requests; print('Всё готово!')"
 Создай файл `bot.py` и вставь следующий код:
 
 ```python
-import telebot
+import os
+import time
+
 import requests
+import telebot
+from telebot import apihelper
 
-# ===== НАСТРОЙКИ =====
-BOT_TOKEN = "вставь_свой_токен_здесь"
-WEATHER_API_KEY = "вставь_свой_ключ_погоды_здесь"
+BOT_TOKEN = "8659064623:AAHiLKhVJ8rkUrOt064EfdLEujBs6LxydOs"
+OWM_API_KEY = "9455d981b0e1a3288dc4538766f2ae48"
 
-# Создаём объект бота
 bot = telebot.TeleBot(BOT_TOKEN)
-
-# ===== СЛОВАРЬ ЭМОДЗИ ДЛЯ ПОГОДЫ =====
-WEATHER_EMOJI = {
-    "clear sky": "☀️",
-    "few clouds": "🌤️",
-    "scattered clouds": "⛅",
-    "broken clouds": "☁️",
-    "shower rain": "🌧️",
-    "rain": "🌦️",
-    "thunderstorm": "⛈️",
-    "snow": "❄️",
-    "mist": "🌫️",
-}
-
-def get_weather(city):
-    """
-    Функция для получения погоды по названию города.
-    Делает запрос к OpenWeatherMap API и возвращает
-    отформатированный текст с данными о погоде.
-    """
-    # Формируем URL запроса
-    url = (
-        f"https://api.openweathermap.org/data/2.5/weather"
-        f"?q={city}"
-        f"&appid={WEATHER_API_KEY}"
-        f"&units=metric"   # температура в Цельсиях
-        f"&lang=ru"        # описание на русском языке
-    )
-
-    # Отправляем запрос
-    response = requests.get(url)
-
-    # Проверяем успешность запроса
-    if response.status_code != 200:
-        return None
-
-    # Парсим JSON-ответ
-    data = response.json()
-
-    # Извлекаем нужные данные
-    city_name     = data["name"]
-    temp          = round(data["main"]["temp"])
-    feels_like    = round(data["main"]["feels_like"])
-    humidity      = data["main"]["humidity"]
-    wind_speed    = round(data["wind"]["speed"])
-    description   = data["weather"][0]["description"]
-
-    # Подбираем эмодзи
-    emoji = WEATHER_EMOJI.get(data["weather"][0]["main"].lower(), "🌡️")
-
-    # Формируем красивый ответ
-    result = (
-        f"{emoji} Погода в {city_name}\n\n"
-        f"🌡️ Температура: {temp}°C\n"
-        f"🤔 Ощущается как: {feels_like}°C\n"
-        f"💧 Влажность: {humidity}%\n"
-        f"💨 Ветер: {wind_speed} м/с\n"
-        f"📋 Условия: {description}"
-    )
-
-    return result
+OWM_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 
-# ===== ОБРАБОТЧИКИ КОМАНД =====
+def configure_telegram_proxy() -> None:
+    proxy_url = os.getenv("TG_PROXY")
+    if proxy_url:
+        apihelper.proxy = {"https": proxy_url}
+        print("Прокси для Telegram включен (TG_PROXY).")
+
+
+def get_weather_emoji(weather_main: str) -> str:
+    weather_map = {
+        "Clear": "☀️",
+        "Clouds": "☁️",
+        "Rain": "🌧",
+        "Drizzle": "🌦",
+        "Thunderstorm": "⛈",
+        "Snow": "❄️",
+        "Mist": "🌫",
+        "Fog": "🌫",
+        "Haze": "🌫",
+        "Smoke": "🌫",
+        "Dust": "🌪",
+        "Sand": "🌪",
+        "Ash": "🌋",
+        "Squall": "💨",
+        "Tornado": "🌪",
+    }
+    return weather_map.get(weather_main, "🌍")
+
+
+def get_weather(city_name: str) -> str:
+    params = {
+        "q": city_name,
+        "appid": OWM_API_KEY,
+        "units": "metric",
+        "lang": "ru",
+    }
+
+    try:
+        response = requests.get(OWM_URL, params=params, timeout=10)
+        data = response.json()
+        if response.status_code != 200 or data.get("cod") != 200:
+            return "❌ Город не найден. Проверьте название и попробуйте снова."
+        city = data["name"]
+        temp = data["main"]["temp"]
+        feels_like = data["main"]["feels_like"]
+        humidity = data["main"]["humidity"]
+        wind_speed = data["wind"]["speed"]
+        weather_description = data["weather"][0]["description"]
+        weather_main = data["weather"][0]["main"]
+
+        emoji = get_weather_emoji(weather_main)
+        result = (
+            f"{emoji} Погода в городе: {city}\n\n"
+            f"🌡 Температура: {temp}°C\n"
+            f"🤗 Ощущается как: {feels_like}°C\n"
+            f"💧 Влажность: {humidity}%\n"
+            f"💨 Скорость ветра: {wind_speed} м/с\n"
+            f"📝 Описание: {weather_description.capitalize()}"
+        )
+        return result
+
+    except requests.exceptions.RequestException:
+        return "⚠️ Ошибка сети при запросе погоды. Попробуйте позже."
+    except Exception:
+        return "⚠️ Произошла непредвиденная ошибка. Попробуйте позже."
+
 
 @bot.message_handler(commands=["start"])
-def send_welcome(message):
-    """Обработчик команды /start"""
+def send_start(message):
     bot.reply_to(
         message,
-        "👋 Привет! Я погодный бот.\n\n"
-        "Просто напиши название города, "
-        "и я расскажу тебе о погоде!\n\n"
-        "Например: Москва или London"
+        "Привет! 👋\n"
+        "Я бот погоды.\n"
+        "Просто отправь название города (например: Москва или London), "
+        "и я пришлю текущую погоду.",
     )
+
 
 @bot.message_handler(commands=["help"])
 def send_help(message):
-    """Обработчик команды /help"""
     bot.reply_to(
         message,
-        "📖 Как пользоваться ботом:\n\n"
-        "1. Напиши название города на русском или английском\n"
-        "2. Получи актуальную погоду\n\n"
-        "Команды:\n"
-        "/start — начать\n"
-        "/help — эта справка"
+        "📌 Доступные команды:\n"
+        "/start — приветствие\n"
+        "/help — список команд\n\n"
+        "Также можно просто отправить название города.",
     )
+
 
 @bot.message_handler(func=lambda message: True)
 def handle_city(message):
-    """
-    Обработчик всех остальных сообщений.
-    Принимает текст как название города и запрашивает погоду.
-    """
-    city = message.text.strip()
+    city_name = message.text.strip()
+    if not city_name:
+        bot.reply_to(message, "Введите название города.")
+        return
 
-    # Получаем данные о погоде
-    weather_info = get_weather(city)
-
-    if weather_info:
-        bot.reply_to(message, weather_info)
-    else:
-        bot.reply_to(
-            message,
-            f"❌ Город «{city}» не найден.\n"
-            f"Проверь правильность написания и попробуй снова."
-        )
+    weather_text = get_weather(city_name)
+    bot.reply_to(message, weather_text)
 
 
-# ===== ЗАПУСК БОТА =====
-print("Бот запущен! Нажми Ctrl+C для остановки.")
-bot.polling(none_stop=True)
+if __name__ == "__main__":
+    configure_telegram_proxy()
+    print("Бот запущен...")
+    while True:
+        try:
+            bot.infinity_polling(skip_pending=True, timeout=20, long_polling_timeout=20)
+        except Exception as error:
+            print(f"Сбой подключения к Telegram API: {error}")
+            print("Повторная попытка через 10 секунд...")
+            time.sleep(10)
+
 ```
 
-### Разбор кода по блокам
-
-| Блок | Что делает |
-|------|-----------|
-| `BOT_TOKEN`, `WEATHER_API_KEY` | Хранят секретные ключи |
-| `WEATHER_EMOJI` | Словарь для подбора эмодзи по погоде |
-| `get_weather(city)` | Делает запрос к API и возвращает текст с погодой |
-| `@bot.message_handler(commands=["start"])` | Реагирует на команду /start |
-| `@bot.message_handler(commands=["help"])` | Реагирует на команду /help |
-| `handle_city(message)` | Реагирует на любое текстовое сообщение |
-| `bot.polling()` | Запускает бота и держит его активным |
-
-> 📷 _[ДИАГРАММА: UML-диаграмма последовательности обработки запроса пользователя]_
 
 ---
 
@@ -310,7 +299,10 @@ python bot.py
 3. Напиши `Москва` — должна прийти погода
 4. Напиши `ааааа` — должно прийти сообщение об ошибке
 
-> 📷 _[СКРИНШОТ: Диалог с ботом — команда /start и запрос погоды]_
+<img width="1178" height="717" alt="image" src="https://github.com/user-attachments/assets/3dfe824a-5e90-4878-bac1-fadbc0edfc2c" />
+<img width="682" height="138" alt="image" src="https://github.com/user-attachments/assets/13d0621f-d445-4bdc-b948-cecfc2359261" />
+
+
 
 ---
 
@@ -321,6 +313,8 @@ python bot.py
 ### 6.1 Расширенный словарь эмодзи
 
 Добавили больше соответствий между погодными условиями и эмодзи для более наглядного отображения.
+<img width="713" height="244" alt="image" src="https://github.com/user-attachments/assets/57050e5b-591b-484c-9011-1d4ba893fcd2" />
+
 
 ### 6.2 Поддержка русских названий городов
 
@@ -329,6 +323,8 @@ python bot.py
 ### 6.3 Обработка ошибок
 
 Добавили проверку статуса ответа от API — если город не найден, бот выводит понятное сообщение об ошибке вместо технического сбоя.
+
+
 
 ---
 
