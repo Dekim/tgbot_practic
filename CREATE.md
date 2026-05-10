@@ -50,8 +50,6 @@ OpenWeatherMap API
 Пользователь получает погоду
 ```
 
-> 📷 _[ДИАГРАММА: Вставь сюда схему взаимодействия компонентов]_
-
 ---
 
 ## Что нам понадобится
@@ -72,7 +70,8 @@ OpenWeatherMap API
 2. В поиске введи `@BotFather`
 3. Нажми **Start**
 
-> 📷 _[СКРИНШОТ: Переписка с BotFather — команда /start]_
+> <img width="852" height="677" alt="image" src="https://github.com/user-attachments/assets/46cd7c5f-2b33-4b8e-a59c-eab96dc00fdb" />
+
 
 ### 1.2 Создаём нового бота
 
