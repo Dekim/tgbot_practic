@@ -1,0 +1,50 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "Проектная практика 2026"
+theme = "clarity"
+
+[[menu.main]]
+  name = "Главная"
+  url = "/main/"
+  weight = 1
+
+[[menu.main]]
+  name = "О проекте"
+  url = "/about/"
+  weight = 2
+
+[[menu.main]]
+  name = "Участники"
+  url = "/participants/"
+  weight = 3
+
+[[menu.main]]
+  name = "Журнал"
+  url = "/journal/"
+  weight = 4
+
+[[menu.main]]
+  name = "Ресурсы"
+  url = "/resources/"
+  weight = 5
+
+[[menu.main]]
+  name = "Партнёр"
+  url = "/partner/"
+  weight = 6
+
+  [params]
+  customCSS = ["css/custom.css"]
+  [params.author]
+   name = "Автор"
+   email = "str7503@mail.ru"
+  
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+
+
+
