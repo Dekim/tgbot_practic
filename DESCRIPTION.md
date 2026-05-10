@@ -93,9 +93,9 @@ python bot.py
 ```
 weather-bot/
 ├── bot.py              # Основной код бота
-├── README.md           # Описание проекта
-├── GUIDE.md            # Техническое руководство
-├── JOURNAL.md          # Журнал прогресса
+├── README.md           
+├── DESCRIPTION.md      # Описание проекта
+├── CREATE.md           # Журнал прогресса
 ├── docs/               # Исходники веб-сайта
 │   ├── index.html
 │   ├── about.html
