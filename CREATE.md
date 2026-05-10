@@ -70,6 +70,7 @@ OpenWeatherMap API
 2. В поиске введи `@BotFather`
 3. Нажми **Start**
 
+<img width="389" height="361" alt="image" src="https://github.com/user-attachments/assets/b677b189-03d8-462b-8aa4-ff4c990ac1c2" />
 
 
 
