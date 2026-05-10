@@ -5,7 +5,7 @@ import requests
 import telebot
 from telebot import apihelper
 
-BOT_TOKEN = "8778972764:AAGwbeTLfB-YisnyeKhcieWqR3ihol-7qJY"
+BOT_TOKEN = "8659064623:AAHiLKhVJ8rkUrOt064EfdLEujBs6LxydOs"
 OWM_API_KEY = "9455d981b0e1a3288dc4538766f2ae48"
 
 bot = telebot.TeleBot(BOT_TOKEN)
