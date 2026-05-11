@@ -2,6 +2,7 @@ baseURL = "http://example.org/"
 languageCode = "en-us"
 title = "Проектная практика 2026"
 theme = "clarity"
+publishDir = "../docs"
 
 [[menu.main]]
   name = "Главная"
