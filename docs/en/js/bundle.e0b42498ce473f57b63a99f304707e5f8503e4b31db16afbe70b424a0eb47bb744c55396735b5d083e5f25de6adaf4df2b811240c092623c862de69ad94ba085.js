@@ -9,8 +9,8 @@ const pageHasLoaded = 'DOMContentLoaded';
 const imageAltClass = 'img_alt';
 
 
-const defaultSiteLanguage = 'en-us';
-const baseURL = 'http://example.org/';
+const defaultSiteLanguage = 'ru';
+const baseURL = 'https://dekim.github.io/tgbot_practic/';
 const searchFieldClass = '.search_field';
 const searchClass = '.search';
 const goBackClass = 'button_back';

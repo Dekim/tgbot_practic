@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Проектная практика 2026</title>
-    <link>http://example.org/tags/</link>
+    <link>https://dekim.github.io/tgbot_practic/tags/</link>
     <description>Recent content in Tags on Проектная практика 2026</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>ru</language>
     <managingEditor>str7503@mail.ru (Автор)</managingEditor>
-    <webMaster>str7503@mail.ru (Автор)</webMaster><atom:link href="http://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <webMaster>str7503@mail.ru (Автор)</webMaster><atom:link href="https://dekim.github.io/tgbot_practic/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

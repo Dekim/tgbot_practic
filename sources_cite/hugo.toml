@@ -1,5 +1,5 @@
-baseURL = "http://example.org/"
-languageCode = "en-us"
+baseURL = "https://dekim.github.io/tgbot_practic/"
+locale = "ru"
 title = "Проектная практика 2026"
 theme = "clarity"
 publishDir = "../docs"
@@ -8,7 +8,6 @@ publishDir = "../docs"
   name = "Главная"
   url = "/main/"
   weight = 1
-
 [[menu.main]]
   name = "О проекте"
   url = "/about/"
@@ -34,18 +33,15 @@ publishDir = "../docs"
   url = "/partner/"
   weight = 6
 
-  [params]
+[params]
   customCSS = ["css/custom.css"]
   [params.author]
-   name = "Автор"
-   email = "str7503@mail.ru"
-  
+    name = "Автор"
+    email = "str7503@mail.ru"
 
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-
-
 
 
