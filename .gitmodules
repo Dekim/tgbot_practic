@@ -1,5 +1,5 @@
 [submodule "hugo-clarity"]
-	path = hugo-clarity
+	path = sources_cite/themes/clarity/hugo-clarity
 	url = https://github.com/chipzoller/hugo-clarity
 [submodule "sources_cite/themes/clarity"]
 	path = sources_cite/themes/clarity
