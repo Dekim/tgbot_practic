@@ -3,7 +3,7 @@ date = '2026-04-25'
 draft = false
 title = 'Главная'
 +++
-![ ](/images/logo.png)
+<img src="/tgbot_practic/images/logo.png" alt="логотип">
 
 <span style="color:blue;font-size:24px">Добро пожаловать</span>
 

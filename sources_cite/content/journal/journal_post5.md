@@ -26,4 +26,4 @@ title = 'Основная разработка Telegram-бота'
 
 **Процесс создания бота**  
 <img src="/tgbot_practic/images/photo_2026-05-10_23-57-15.jpg" alt="фото">
-![ ](/images/photo_2026-05-10_23-57-32.jpg)
+<img src="/tgbot_practic/images/photo_2026-05-10_23-57-32.jpg" alt="фото">
