@@ -90,7 +90,7 @@ weather-bot/
 ├── bot.py              # Основной код бота
 ├── README.md
 ├── sources_cite        # Исходники сайта
-├── info
+├── info                # Информация о сайте
 │   ├── DESCRIPTION.md      
 |   ├── CREATE.md           
 │   ├── JOURNAL.md
