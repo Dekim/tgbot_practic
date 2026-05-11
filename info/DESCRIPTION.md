@@ -39,7 +39,7 @@
 
 ```bash
 git clone https://github.com/Dekim/tgbot_practic
-cd weather-bot
+cd tgbot_practic
 ```
 
 ### 2. Установи зависимости
