@@ -88,12 +88,14 @@ python bot.py
 ```
 weather-bot/
 ├── bot.py              # Основной код бота
-├── README.md           
-├── docs/               
+├── README.md
+├── sources_cite        # Исходники сайта
+├── info
 │   ├── DESCRIPTION.md      
 |   ├── CREATE.md           
 │   ├── JOURNAL.md
-│   └── Запись работы бота.mp4
+│   └── Запись работы бота.mp4 
+├── docs                # Сайт
 └── reports/            # Отчёты по практике
     ├── report.docx
     └── report.pdf
