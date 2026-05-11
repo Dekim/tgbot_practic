@@ -38,7 +38,7 @@
 ### 1. Клонируй репозиторий
 
 ```bash
-git clone https://github.com/ваш-репозиторий/weather-bot.git
+git clone https://github.com/Dekim/tgbot_practic
 cd weather-bot
 ```
 
@@ -50,12 +50,7 @@ pip install pyTelegramBotAPI requests
 
 ### 3. Настрой токены
 
-Открой файл `bot.py` и вставь свои ключи:
-
-```python
-BOT_TOKEN = "твой_токен_от_BotFather"
-WEATHER_API_KEY = "твой_ключ_от_OpenWeatherMap"
-```
+Открой файл `bot.py` и вставь свои ключи
 
 ### 4. Запусти бота
 
