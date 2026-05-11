@@ -1,6 +1,6 @@
 +++
 date = '2026-05-03'
-draft = true
+draft = false
 title = 'Основная разработка Telegram-бота'
 +++
 

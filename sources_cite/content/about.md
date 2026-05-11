@@ -1,6 +1,6 @@
 +++
 date = '2026-04-25'
-draft = true
+draft = false
 title = 'О проекте'
 +++
 

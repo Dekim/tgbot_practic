@@ -1,6 +1,6 @@
 +++
 date = '2026-04-25'
-draft = true
+draft = false
 title = 'Участники'
 +++
 <span style="color:blue;font-size:24px">Участники проекта</span>

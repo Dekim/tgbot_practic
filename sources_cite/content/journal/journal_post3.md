@@ -1,6 +1,6 @@
 +++
 date = '2026-04-18'
-draft = true
+draft = false
 title = 'Создание Git-репозитория'
 +++
 

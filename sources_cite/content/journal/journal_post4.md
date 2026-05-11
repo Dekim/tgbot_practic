@@ -1,6 +1,6 @@
 +++
 date = '2026-04-21'
-draft = true
+draft = false
 title = 'Работа с API и подготовка токенов'
 +++
 

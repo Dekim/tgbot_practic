@@ -1,6 +1,6 @@
 +++
 date = '2026-05-09'
-draft = true
+draft = false
 title = 'Разработка веб-сайта проекта'
 +++
 
