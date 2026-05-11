@@ -143,31 +143,7 @@
 &lt;p&gt;&lt;strong&gt;Результат&lt;/strong&gt;:&lt;/p&gt;
 &lt;p&gt;Мы создали полноценного рабочего Telegram-бота для получения прогноза погоды.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Процесс создания бота&lt;/strong&gt;&lt;br&gt;
-&lt;figure&gt;
-  &lt;picture&gt;
-
-    
-      
-        
-        
-        
-        
-        
-        
-    &lt;img
-      loading=&#34;lazy&#34;
-      decoding=&#34;async&#34;
-      alt=&#34; &#34;
-      
-        class=&#34;image_figure image_internal image_unprocessed&#34;
-        src=&#34;https://dekim.github.io/images/photo_2026-05-10_23-57-15.jpg&#34;
-      
-      
-    /&gt;
-
-    &lt;/picture&gt;
-&lt;/figure&gt;
-
+&lt;img src=&#34;https://dekim.github.io/tgbot_practic/images/photo_2026-05-10_23-57-15.jpg&#34; alt=&#34;фото&#34;&gt;
 &lt;figure&gt;
   &lt;picture&gt;
 
