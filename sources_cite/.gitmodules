@@ -1,15 +1,3 @@
-[submodule "themes/ananke"]
-	path = quickstart/themes/ananke
-	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
-[submodule "themes/archie"]
-	path = quickstart/themes/archie
-	url = https://github.com/athul/archie
-[submodule "themes/hello-friend"]
-	path = quickstart/themes/hello-friend
-	url = https://github.com/panr/hugo-theme-hello-friend
-[submodule "themes/coder"]
-	path = quickstart/themes/coder
-	url = https://github.com/luizdepra/hugo-coder
 [submodule "themes/clarity"]
-	path = quickstart/themes/clarity
-	url = https://github.com/chipzoller/hugo-clarity
+        path = sources_cite/themes/clarity
+        url = https://github.com/chipzoller/hugo-clarity
