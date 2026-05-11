@@ -86,7 +86,7 @@ python bot.py
 ## 📁 Структура репозитория
 
 ```
-weather-bot/
+tgbot_practic/
 ├── bot.py              # Основной код бота
 ├── README.md
 ├── sources_cite        # Исходники сайта
