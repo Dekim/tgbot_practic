@@ -1,0 +1,6 @@
+[submodule "hugo-clarity"]
+	path = hugo-clarity
+	url = https://github.com/chipzoller/hugo-clarity
+[submodule "sources_cite/themes/clarity"]
+	path = sources_cite/themes/clarity
+	url = https://github.com/chipzoller/hugo-clarity
