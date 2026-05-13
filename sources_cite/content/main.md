@@ -2,6 +2,7 @@
 date = '2026-04-25'
 draft = false
 title = 'Главная'
+url = "/"
 +++
 
 <img src="/tgbot_practic/images/logo.png" alt=" ">
@@ -35,6 +36,3 @@ title = 'Главная'
 ## Ответственный по практике
 
 Семёнова Валерия Валерьевна
-
-
-

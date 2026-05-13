@@ -5,19 +5,14 @@ theme = "clarity"
 publishDir = "../docs"
 
 [[menu.main]]
-  name = "Главная"
-  url = "/"
-  weight = 1
-
-[[menu.main]]
   name = "О проекте"
   url = "/about/"
-  weight = 2
+  weight = 1
 
 [[menu.main]]
   name = "Проектная практика"
   url = "/participants/"
-  weight = 3
+  weight = 2
 
 [params]
   numberOfRecentPosts = 0
