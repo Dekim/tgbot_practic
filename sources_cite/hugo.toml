@@ -8,30 +8,16 @@ publishDir = "../docs"
   name = "Главная"
   url = "/main/"
   weight = 1
+
 [[menu.main]]
   name = "О проекте"
   url = "/about/"
   weight = 2
 
 [[menu.main]]
-  name = "Участники"
+  name = "Проектная практика"
   url = "/participants/"
   weight = 3
-
-[[menu.main]]
-  name = "Журнал"
-  url = "/journal/"
-  weight = 4
-
-[[menu.main]]
-  name = "Ресурсы"
-  url = "/resources/"
-  weight = 5
-
-[[menu.main]]
-  name = "Партнёр"
-  url = "/partner/"
-  weight = 6
 
 [params]
   customCSS = ["css/custom.css"]
