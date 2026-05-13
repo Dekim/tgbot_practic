@@ -6,7 +6,7 @@ publishDir = "../docs"
 
 [[menu.main]]
   name = "Главная"
-  url = "/main/"
+  url = "/"
   weight = 1
 
 [[menu.main]]
@@ -20,6 +20,8 @@ publishDir = "../docs"
   weight = 3
 
 [params]
+  numberOfRecentPosts = 0
+  mainSections = [ ]
   customCSS = ["css/custom.css"]
   [params.author]
     name = "Автор"
