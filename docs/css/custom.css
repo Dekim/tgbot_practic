@@ -3,3 +3,7 @@
 body {
   font-family: 'Cause', sans-serif;
 }
+
+.recent-posts {
+  display: none;
+}
